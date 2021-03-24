@@ -62,8 +62,11 @@ function installFromUrl {
 
 function installFromRawUrl {
   local remoteFile="$1"
-  curl -J -L -o /tmp/plexmediaserver.deb "${remoteFile}"
-  local last=$?
+  local last=0
+  if [[ ! -e /tmp/plexmediaserver.deb ]]; then
+    curl -k -J -L -o /tmp/plexmediaserver.deb "${remoteFile}"
+    local last=$?
+  fi
 
   # test if deb file size is ok, or if download failed
   if [[ "$last" -gt "0" ]] || [[ $(stat -c %s /tmp/plexmediaserver.deb) -lt 10000 ]]; then
