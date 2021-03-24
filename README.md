@@ -4,6 +4,29 @@
 
 With our easy-to-install Plex Media Server software and your Plex apps, available on all your favorite phones, tablets, streaming devices, gaming consoles, and smart TVs, you can stream your video, music, and photo collections any time, anywhere, to any device.
 
+## Multi-Arch Fork
+
+This fork of `pms-docker` is to improve the multi-arch support, allowing a single tag to be created with an `amd64`, `arm64v8`, and `arm32v7` image available.
+This can then be pulled from the [Docker Hub repository](https://hub.docker.com/r/wwwil/pms-docker/tags) by running the following on a compatible architecture:
+
+```bash
+docker pull wwwil/pms-docker:latest
+```
+
+To build and push the images run:
+
+```bash
+./build-multiarch.sh --push
+```
+
+The image repository to use is set at the top of the script.
+The `--push` argument can be omitted to avoid pushing.
+
+**There is currently an issue with the `arm64v8` build.**
+This issue is related to QEMU and leads to a segmentation fault when downloading the `.deb` file with `curl`.
+To work around this the `arm64v8` Dockerfile will copy in the `.deb` file.
+This must be manually fetched from the [Plex downloads page](https://www.plex.tv/media-server-downloads/) and placed in the repository root folder.
+
 ## Usage
 
 Before you create your container, you must decide on the type of networking you wish to use.  There are essentially three types of networking available:
