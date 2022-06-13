@@ -56,7 +56,7 @@ COPY root/ /
 
 # Copy the .deb in to avoid using curl as it has some issues QEMU arm64
 # https://github.com/docker/buildx/issues/328
-COPY plexmediaserver_1.22.0.4163-d8c4875dd_arm64.deb /tmp/plexmediaserver.deb
+COPY plexmediaserver_1.22.1.4228-724c56e62_arm64.deb /tmp/plexmediaserver.deb
 
 RUN \
 # Save version and install
